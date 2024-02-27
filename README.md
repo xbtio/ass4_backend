@@ -1,6 +1,8 @@
 ### CAUTION
 **PRODUCT AND OFFERS LINK DOESN'T WORK ON [https://ass4-backend.onrender.com] BECAUSE RENDER SERVER MAKE TOO MUCH REQUESTS AND KASPI API BLOCKS IP OF RENDER SERVER (gives 429 error).
 TO FULLY TEST I RECOMMEND RUNNING LOCALLY. BESIDES THIS ALL OTHER FUNCTIONS WORK PROPERLY ON A DEPLOYED SITE**
+![image](https://github.com/xbtio/ass4_backend/assets/75768874/2a0a02ca-e44b-4a8f-8abd-50dbb47c8cd9)
+
 
 # Assignment 4. Final Project
 # Koshkarbay Yernar SE-2205
