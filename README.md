@@ -15,7 +15,7 @@ TO FULLY TEST I RECOMMEND RUNNING LOCALLY. BESIDES THIS ALL OTHER FUNCTIONS WORK
 
 ### Key Features
 The registration and login functionalities for users have been implemented on the respective register and login routes.
-To access admin panel you have to enter "/admin" url. Login: admin  Password: admin
+To access admin panel you have to enter "/admin" url. **Login: admin  Password: admin**
 I have used Kaspi API for retrieving products and quickchart to show charts for each product
 In Product and Offers you can search any product you want.
 
