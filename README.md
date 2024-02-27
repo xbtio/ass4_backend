@@ -1,3 +1,7 @@
+### CAUTION
+**PRODUCT AND OFFERS LINK DOESN'T WORK ON [https://ass4-backend.onrender.com] BECAUSE RENDER SERVER MAKE TOO MUCH REQUESTS AND KASPI API BLOCKS IP OF RENDER SERVER (gives 429 error).
+TO FULLY TEST I RECOMMEND RUNNING LOCALLY**
+
 # Assignment 4. Final Project
 # Koshkarbay Yernar SE-2205
 
@@ -6,11 +10,6 @@
     npm install
     node app.js
     go to http://localhost:3000
-
-### CAUTION
-**PRODUCT AND OFFERS LINK DOESN'T WORK ON [https://ass4-backend.onrender.com] BECAUSE RENDER SERVER MAKE TOO MUCH REQUESTS AND KASPI API BLOCKS IP OF RENDER SERVER (gives 429 error).
-TO FULLY TEST I RECOMMEND RUNNING LOCALLY**
-
 
 ### Key Features
 The registration and login functionalities for users have been implemented on the respective register and login routes.
