@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Main Page</title>
+    <!-- Link to Bootstrap CSS -->
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <style>
+      body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    }
+    .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+    /* Navbar Enhancements */
+    .navbar {
+    overflow: hidden;
+    background-color: #007bff; /* Primary blue color */
+    padding: 0 20px;
+    }
+
+    .navbar a {
+    /* float: left; */
+    /* display: block; */
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    }
+
+    .navbar a:hover, .navbar a:focus {
+    background-color: #0056b3; /* Darker shade for hover/focus */
+    color: white;
+    }
+    .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+    /* Card Enhancements */
+    .card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px; /* Rounded corners for the card */
+    }
+
+    .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+    .card img {
+    border-radius: 5px 5px 0 0;
+    }
+
+    .card-body {
+    padding: 2px 16px;
+    }
+
+    /* Responsive Item Container */
+    .item-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Change from 'space-between' to 'space-around' for even spacing */
+    }
+
+    .item {
+    flex: 1; /* Flex grow to fill available space */
+    margin: 10px;
+    min-width: 300px; /* Minimum width for smaller screens */
+    }
+
+    /* Footer Enhancements */
+    .footer {
+    background-color: #007bff; /* Match navbar color */
+    color: black;
+    text-align: center;
+    padding: 10px;
+    position: relative; /* Change from 'fixed' to 'relative' */
+    bottom: 0;
+    width: 100%;
+    }
+  
+    /* Responsive Adjustments */
+    @media screen and (max-width: 768px) {
+    .navbar a {
+        float: none;
+        display: block;
+        text-align: center;
+    }
+    
+    .item {
+        width: 100%; /* Full width on smaller screens */
+        margin: 10px 0;
+    }
+    }
+    </style>
+    <!-- Adjust the path as needed -->
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="/logout">Logout</a>
+      <a href="/items">Main page</a>
+      <a href="/offers">Product and Offers</a>
+    </div>
+    <div class="container">
+      <h1 class="text-center mt-5 mb-4">Welcome to Main page</h1>
+      <!-- Add a button to trigger localization change -->
+      <button id="localizeBtn" class="btn btn-primary mb-4">
+        Switch language
+      </button>
+
+      <div class="row">
+        <% items.forEach(item => { %>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div
+              id="carousel<%= item._id %>"
+              class="carousel slide"
+              data-ride="carousel"
+            >
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img
+                    src="<%= item.image1 %>"
+                    class="d-block w-100"
+                    alt="Image 1"
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="<%= item.image2 %>"
+                    class="d-block w-100"
+                    alt="Image 2"
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="<%= item.image3 %>"
+                    class="d-block w-100"
+                    alt="Image 3"
+                  />
+                </div>
+              </div>
+              <a
+                class="carousel-control-prev"
+                href="#carousel<%= item._id %>"
+                role="button"
+                data-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a
+                class="carousel-control-next"
+                href="#carousel<%= item._id %>"
+                role="button"
+                data-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+            <div class="card-body">
+              <!-- Use a data attribute to store localized text -->
+              <h5
+                class="card-title"
+                data-localized-name="<%= item.itemNameLocalized %>"
+              >
+                <%= item.itemName %>
+              </h5>
+              <p
+                class="card-text"
+                data-localized-description="<%= item.descriptionLocalized %>"
+              >
+                <%= item.description %>
+              </p>
+            </div>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+
+    <!-- Link to Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      // Function to toggle between localized and default text
+      function toggleLocalization() {
+        const localized = document.querySelectorAll("[data-localized-name]");
+        const descriptions = document.querySelectorAll(
+          "[data-localized-description]"
+        );
+
+        localized.forEach((element) => {
+          const currentText = element.textContent;
+          const localizedText = element.getAttribute("data-localized-name");
+          element.textContent = localizedText;
+          element.setAttribute("data-localized-name", currentText);
+        });
+
+        descriptions.forEach((element) => {
+          const currentText = element.textContent;
+          const localizedText = element.getAttribute(
+            "data-localized-description"
+          );
+          element.textContent = localizedText;
+          element.setAttribute("data-localized-description", currentText);
+        });
+      }
+
+      // Event listener for the button click
+      document
+        .getElementById("localizeBtn")
+        .addEventListener("click", function () {
+          toggleLocalization();
+        });
+    </script>
+    <footer class="footer mt-5 bg-white">
+      <p>Koshkarbay Yernar | SE-2205</p>
+    </footer>
+  </body>
+</html>

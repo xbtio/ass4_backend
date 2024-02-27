@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Page</title>
+    <style>
+      body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 24px;
+      width: 100%;
+      max-width: 960px;
+      margin-bottom: 24px;
+    }
+    h1, h2 {
+      color: #333;
+      text-align: center;
+    }
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    form label {
+      display: block;
+      margin-bottom: 8px;
+    }
+    input[type="text"],
+    input[type="password"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+    input[type="submit"] {
+      grid-column: span 2;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 16px;
+    }
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    .card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .card-header {
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+    .card-body {
+      font-size: 16px;
+    }
+    .action-buttons {
+      text-align: right;
+    }
+    .action-buttons button {
+      background-color: #ef5350;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+    .action-buttons button.edit {
+      background-color: #26a69a;
+    }
+    .footer {
+      background-color: #fafafa;
+      text-align: center;
+      padding: 1px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+    @media screen and (max-width: 768px) {
+      form {
+        grid-template-columns: 1fr;
+      }
+      input[type="submit"] {
+        grid-column: span 1;
+      }
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Admin Page</h1>
+      <form action="/admin/item/add" method="POST">
+        <label for="itemName">Item Name (English):</label>
+        <input type="text" id="itemName" name="itemName" required />
+        <label for="itemNameLocalized">Item Name (Russian):</label>
+        <input
+          type="text"
+          id="itemNameLocalized"
+          name="itemNameLocalized"
+          required
+        />
+        <label for="description">Description (English):</label>
+        <textarea id="description" name="description" required></textarea>
+        <label for="descriptionLocalized">Description (Russian):</label>
+        <textarea
+          id="descriptionLocalized"
+          name="descriptionLocalized"
+          required
+        ></textarea>
+        <label for="image1">Image 1 URL:</label>
+        <input type="text" id="image1" name="image1" required />
+        <label for="image2">Image 2 URL:</label>
+        <input type="text" id="image2" name="image2" required />
+        <label for="image3">Image 3 URL:</label>
+        <input type="text" id="image3" name="image3" required />
+        <input type="submit" value="Add Item" />
+      </form>
+      <!-- User List Section -->
+      <h2>Item List</h2>
+      <ul class="item-list">
+        <% items.forEach(item => { %>
+        <li class="item-item">
+          <div class="item-info">
+            <div>
+              <strong>Item Name:</strong> <%= item.itemNameLocalized %> (<%=
+              item.itemName %>)<br />
+              <strong>Description:</strong> <%= item.descriptionLocalized %>
+              (<%= item.description %>)<br />
+              <strong>Created At:</strong> <%= item.createdAt %><br />
+
+              <strong>Updated At:</strong> <%= item.updatedAt %>
+            </div>
+            <div>
+              <button
+                onclick="window.location.href='/admin/item/edit/<%= item._id %>'"
+              >
+                Edit
+              </button>
+              <form
+                action="/admin/item/delete/<%= item._id %>"
+                method="POST"
+                style="display: inline"
+              >
+                <button type="submit">Delete</button>
+              </form>
+            </div>
+          </div>
+        </li>
+        <% }); %>
+      </ul>
+      <h1>Admin Page</h1>
+      <form action="/admin/user/add" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+        <label for="isAdmin">Admin:</label>
+        <select id="isAdmin" name="isAdmin">
+          <option value="false">No</option>
+          <option value="true">Yes</option>
+        </select>
+        <input type="submit" value="Add User" />
+      </form>
+      <h2>User List</h2>
+      <ul class="user-list">
+        <% users.forEach(user => { %>
+        <li class="user-item">
+          <div class="user-info">
+            <div>
+              <strong>Username:</strong> <%= user.username %><br />
+              <strong>Created At:</strong> <%= user.createdAt %><br />
+              <strong>Updated At:</strong> <%= user.updatedAt %><br />
+              <strong>Admin:</strong> <%= user.isAdmin ? 'Yes' : 'No' %>
+            </div>
+            <div>
+              <button
+                onclick="window.location.href='/admin/user/edit/<%= user._id %>'"
+              >
+                Edit
+              </button>
+              <form
+                action="/admin/user/delete/<%= user._id %>"
+                method="POST"
+                style="display: inline"
+              >
+                <button type="submit">Delete</button>
+              </form>
+            </div>
+          </div>
+        </li>
+        <% }); %>
+      </ul>
+    </div>
+    <!-- <div class="container">
+      <h1>Admin Page</h1>
+      <form action="/admin/user/add" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+        <label for="isAdmin">Admin:</label>
+        <select id="isAdmin" name="isAdmin">
+          <option value="false">No</option>
+          <option value="true">Yes</option>
+        </select>
+        <input type="submit" value="Add User" />
+      </form>
+      <h2>User List</h2>
+      <ul class="user-list">
+        <% users.forEach(user => { %>
+        <li class="user-item">
+          <div class="user-info">
+            <div>
+              <strong>Username:</strong> <%= user.username %><br />
+              <strong>Created At:</strong> <%= user.createdAt %><br />
+              <strong>Updated At:</strong> <%= user.updatedAt %><br />
+              <strong>Admin:</strong> <%= user.isAdmin ? 'Yes' : 'No' %>
+            </div>
+            <div>
+              <button
+                onclick="window.location.href='/admin/user/edit/<%= user._id %>'"
+              >
+                Edit
+              </button>
+              <form
+                action="/admin/user/delete/<%= user._id %>"
+                method="POST"
+                style="display: inline"
+              >
+                <button type="submit">Delete</button>
+              </form>
+            </div>
+          </div>
+        </li>
+        <% }); %>
+      </ul>
+    </div> -->
+    <footer class="footer mt-5 bg-white">
+      <p>Koshkarbay Yernar | SE-2205</p>
+    </footer>
+  </body>
+</html>

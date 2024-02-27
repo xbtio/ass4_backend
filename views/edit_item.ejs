@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Item</title>
+    <style>
+      body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="password"],
+        select {
+            font-size: 14px;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #e1e4e8;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        select:focus {
+            border-color: #80bdff;
+            outline: none;
+        }
+        input[type="submit"] {
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+      
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Edit Item</h1>
+      <form action="/admin/item/edit/<%= item._id %>" method="POST">
+        <label for="itemName">Item name:</label>
+        <input
+          type="text"
+          id="itemName"
+          name="itemName"
+          value="<%= item.itemName %>"
+          required
+        />
+        <label for="itemNameLocalized">Item name russian:</label>
+        <input
+          type="text"
+          id="itemNameLocalized"
+          name="itemNameLocalized"
+          value="<%= item.itemNameLocalized %>"
+          required
+        />
+        <label for="description">Description:</label>
+        <input
+          type="text"
+          id="description"
+          name="description"
+          value="<%= item.description %>"
+          required
+        />
+        <label for="descriptionLocalized">Description russian:</label>
+        <input
+          type="text"
+          id="descriptionLocalized"
+          name="descriptionLocalized"
+          value="<%= item.descriptionLocalized %>"
+          required
+        />
+        <label for="image1">Image1 URL:</label>
+        <input
+          type="text"
+          id="image1"
+          name="image1"
+          value="<%= item.image1 %>"
+          required
+        />
+        <label for="image2">Image2 URL:</label>
+        <input
+          type="text"
+          id="image2"
+          name="image2"
+          value="<%= item.image2 %>"
+          required
+        />
+        <label for="image3">Image3 URL:</label>
+        <input
+          type="text"
+          id="image3"
+          name="image3"
+          value="<%= item.image3 %>"
+          required
+        />
+        <input type="submit" value="Save Changes" />
+      </form>
+    </div>
+    
+  </body>
+</html>
