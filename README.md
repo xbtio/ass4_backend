@@ -24,6 +24,7 @@ TO FULLY TEST I RECOMMEND RUNNING LOCALLY. BESIDES THIS ALL OTHER FUNCTIONS WORK
 ### Deployment
 The application is deployed using the service render.com
 [https://ass4-backend.onrender.com]
+**Second Deploy THAT WORKS** [https://real-cyan-hippo-veil.cyclic.app/login]
 
 
 (!!!) Due to the free subscription plan on this resource, the first connection to my application may take some time.
